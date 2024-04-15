@@ -10,9 +10,7 @@ defmodule StopWords do
   @supported Enum.sort(@include -- @exclude)
 
   for {iso_code, words} <- @mapping, iso_code in @supported do
-    @doc """
-    returns stop words for unquote(iso_code)
-    """
+    @doc "returns stop words for " <> to_string(iso_code)
     def unquote(iso_code)() do
       unquote(words)
     end
