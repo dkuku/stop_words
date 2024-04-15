@@ -5,8 +5,8 @@ defmodule StopWords do
            |> File.read!()
            |> Jason.decode!(keys: :atoms)
 
-  @include Application.compile_env(:stop_words, :include, Map.keys(@mapping))
-  @exclude Application.compile_env(:stop_words, :exclude, [])
+  @include Application.compile_env(:stop_words, :include, Map.keys(@mapping)) |> List.wrap()
+  @exclude Application.compile_env(:stop_words, :exclude, []) |> List.wrap()
   @supported Enum.sort(@include -- @exclude)
 
   for {iso_code, words} <- @mapping, iso_code in @supported do
